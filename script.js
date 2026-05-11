@@ -166,12 +166,17 @@ rotatePhotos();
 window.setTimeout(rotatePhotos, 1200);
 window.setInterval(rotatePhotos, 500000);
 
+const MESSAGE_API_URL = "https://script.google.com/macros/s/AKfycbzVtmC91Bb8PbgQDnRN7x7cnI8iiOPwhlhZ6g262BIKn1ggl6lpYmwFCFPztnr7l38gCw/exec";
 const starterMessages = [
   ["導師", "願你們帶著好奇心出發，走到哪裡都記得自己很珍貴。"],
   ["全班", "畢業快樂，下一站也要閃閃發光。"]
 ];
 
+const writeMessageButton = document.querySelector("#writeMessageButton");
+const messageForm = document.querySelector("#messageForm");
 const messageList = document.querySelector("#messageList");
+const messageStatus = document.querySelector("#messageStatus");
+const messageSubmitButton = document.querySelector("#messageSubmitButton");
 
 function addMessage(name, text) {
   const note = document.createElement("article");
@@ -181,3 +186,50 @@ function addMessage(name, text) {
 }
 
 starterMessages.forEach(([name, text]) => addMessage(name, text));
+
+writeMessageButton.addEventListener("click", () => {
+  messageForm.classList.toggle("is-hidden");
+
+  if (!messageForm.classList.contains("is-hidden")) {
+    document.querySelector("#messageName").focus();
+  }
+});
+
+messageForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const nameInput = document.querySelector("#messageName");
+  const textInput = document.querySelector("#messageText");
+  const name = nameInput.value.trim() || "匿名同學";
+  const message = textInput.value.trim();
+
+  if (!message) {
+    messageStatus.textContent = "請先寫下留言內容。";
+    textInput.focus();
+    return;
+  }
+
+  messageSubmitButton.disabled = true;
+  messageSubmitButton.textContent = "送出中...";
+  messageStatus.textContent = "正在把留言寫進 Google Sheet。";
+
+  try {
+    await fetch(MESSAGE_API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({ name, message })
+    });
+
+    addMessage(name, message);
+    messageForm.reset();
+    messageForm.classList.add("is-hidden");
+    messageStatus.textContent = "";
+  } catch (error) {
+    messageStatus.textContent = "送出失敗，請稍後再試。";
+  } finally {
+    messageSubmitButton.disabled = false;
+    messageSubmitButton.textContent = "送出留言";
+  }
+});

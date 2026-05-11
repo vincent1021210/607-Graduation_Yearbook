@@ -164,7 +164,7 @@ function rotatePhotos() {
 
 rotatePhotos();
 window.setTimeout(rotatePhotos, 1200);
-window.setInterval(rotatePhotos, 50000);
+window.setInterval(rotatePhotos, 500000);
 
 const starterMessages = [
   ["導師", "願你們帶著好奇心出發，走到哪裡都記得自己很珍貴。"],

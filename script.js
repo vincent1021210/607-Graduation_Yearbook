@@ -171,9 +171,6 @@ const starterMessages = [
   ["全班", "畢業快樂，下一站也要閃閃發光。"]
 ];
 
-const writeMessageButton = document.querySelector("#writeMessageButton");
-const closeMessageButton = document.querySelector("#closeMessageButton");
-const messageForm = document.querySelector("#messageForm");
 const messageList = document.querySelector("#messageList");
 
 function addMessage(name, text) {
@@ -184,31 +181,3 @@ function addMessage(name, text) {
 }
 
 starterMessages.forEach(([name, text]) => addMessage(name, text));
-
-writeMessageButton.addEventListener("click", () => {
-  messageForm.classList.toggle("is-hidden");
-
-  if (!messageForm.classList.contains("is-hidden")) {
-    document.querySelector("#messageName").focus();
-  }
-});
-
-closeMessageButton.addEventListener("click", () => {
-  messageForm.classList.add("is-hidden");
-});
-
-messageForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const nameInput = document.querySelector("#messageName");
-  const textInput = document.querySelector("#messageText");
-  const name = nameInput.value.trim() || "匿名同學";
-  const text = textInput.value.trim();
-
-  if (!text) {
-    textInput.focus();
-    return;
-  }
-
-  addMessage(name, text);
-  messageForm.reset();
-});

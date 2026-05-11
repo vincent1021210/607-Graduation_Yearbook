@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=15" />
+    <link rel="stylesheet" href="styles.css?v=16" />
   </head>
   <body>
     <header class="topbar" aria-label="主要導覽">
@@ -173,15 +173,14 @@
         <div class="message-panel">
           <div class="message-title">
             <h2>留言牆</h2>
-            <button class="write-message-button" id="writeMessageButton" type="button">寫留言</button>
+            <a
+              class="write-message-button"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSd2zMw1vf-XNV5x9t7R1PC6JLPf8tsthDEDVKqnrBFb0kzUiA/viewform?usp=header"
+              target="_blank"
+              rel="noopener"
+            >寫留言</a>
           </div>
           <div class="message-content">
-            <form class="message-form is-hidden" id="messageForm">
-              <button class="close-message-button" id="closeMessageButton" type="button" aria-label="關閉留言表單">×</button>
-              <input type="text" id="messageName" maxlength="12" placeholder="你的名字" aria-label="你的名字" />
-              <textarea id="messageText" maxlength="80" placeholder="寫一句想留給大家的話" aria-label="留言內容"></textarea>
-              <button type="submit">貼上留言</button>
-            </form>
             <div class="message-list" id="messageList"></div>
           </div>
         </div>
@@ -192,6 +191,6 @@
       <p>把這一頁留給未來的我們。Class of 2026.</p>
     </footer>
 
-    <script src="script.js?v=15"></script>
+    <script src="script.js?v=16"></script>
   </body>
 </html>

@@ -27,6 +27,12 @@ const classmates = [
   ["27號", "張恩僑"]
 ];
 
+const coverTitle = document.querySelector(".cover-copy h1");
+
+if (coverTitle) {
+  coverTitle.textContent = "兩年青春，剛好成為一本書";
+}
+
 const colors = ["#2f6f9f", "#e56b5d", "#2f8f83", "#7aa95c", "#9b6b43", "#6d5fa8"];
 
 const rotatingPhotos = [
